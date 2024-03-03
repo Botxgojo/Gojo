@@ -20,7 +20,7 @@ let tags = {
   'pdf':'‎ pdf ومشتقاته‎',
   'uploader':'‎‎ رفع الملفات‎',
 }
-const defaultMenu = {
+const defaultاوامر = {
   before: `السلام عليكم 👋. 
 
 ┏━━ salam  *%name*
@@ -28,7 +28,7 @@ const defaultMenu = {
 ⏰ *Uptime:* %muptime  
 ┗━━━━━━━━━━⬣
 %readmore
-  ≡ *B O B I Z A | M E N U*
+  ≡ *G O J O ┇ B O T*
 `.trimStart(),
   header: '┏━━⊜ *_%category_* ',
   body: '┃⋄ %cmd %isdiamond %isPremium',
@@ -92,20 +92,20 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
         for (let tag of plugin.tags)
           if (!(tag in tags) && tag) tags[tag] = tag
     conn.اوامر = conn.اوامر ? conn.اوامر : {}
-    let before = conn.menu.before || defaultMenu.before
-    let header = conn.menu.header || defaultMenu.header
-    let body = conn.menu.body || defaultMenu.body
-    let footer = conn.menu.footer || defaultMenu.footer
-    let after = conn.menu.after || (conn.user.jid == conn.user.jid ? '' : `Powered by https://wa.me/${conn.user.jid.split`@`[0]}`) + defaultMenu.after
+    let before = conn.اوامر.before || defaultاوامر.before
+    let header = conn.اوامر.header || defaultاوامر.header
+    let body = conn.اوامر.body || defaultاوامر.body
+    let footer = conn.اوامر.footer || defaultاوامر.footer
+    let after = conn.اوامر.after || (conn.user.jid == conn.user.jid ? '' : `Powered by https://wa.me/${conn.user.jid.split`@`[0]}`) + defaultاوامر.after
     let _text = [
       before,
       ...Object.keys(tags).map(tag => {
         return header.replace(/%category/g, tags[tag]) + '\n' + [
-          ...help.filter(menu => menu.tags && menu.tags.includes(tag) && menu.help).map(menu => {
-            return menu.help.map(help => {
-              return body.replace(/%cmd/g, menu.prefix ? help : '%p' + help)
-                .replace(/%isdiamond/g, menu.diamond ? '(Ⓛ)' : '')
-                .replace(/%isPremium/g, menu.premium ? '(Ⓟ)' : '')
+          ...help.filter(اوامر => اوامر.tags && اوامر.tags.includes(tag) && اوامر.help).map(اوامر => {
+            return اوامر.help.map(help => {
+              return body.replace(/%cmd/g, اوامر.prefix ? help : '%p' + help)
+                .replace(/%isdiamond/g, اوامر.diamond ? '(Ⓛ)' : '')
+                .replace(/%isPremium/g, اوامر.premium ? '(Ⓟ)' : '')
                 .trim()
             }).join('\n')
           }),
@@ -114,7 +114,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
       }),
       after
     ].join('\n')
-    let text = typeof conn.menu == 'string' ? conn.menu : typeof conn.menu == 'object' ? _text : ''
+    let text = typeof conn.اوامر == 'string' ? conn.اوامر : typeof conn.اوامر == 'object' ? _text : ''
     let replace = {
       '%': '%',
       p: _p, uptime, muptime,
@@ -136,7 +136,7 @@ let handler = async (m, { conn, usedPrefix: _p, __dirname }) => {
 text: text,
 contextInfo: {
 externalAdReply: {
-title: 'BOBIZA BOT ♥',
+title: 'GOJO┇BOT',
 body: "أول بوت واتساب في العالم العربي 💖",
 thumbnailUrl: 'https://telegra.ph/file/2829c7653514416d207e2.jpg',
 sourceUrl: 'https://instagram.com/noureddine_ouafy',
@@ -158,7 +158,7 @@ renderLargerThumbnail: true
 }
 handler.help = ['اوامر']
 handler.tags = ['infobot']
-handler.command = ['menu','b','list'] 
+handler.command = ['اوامر','b','list'] 
 handler.register = false
 
 
