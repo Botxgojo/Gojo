@@ -1,14 +1,14 @@
 import { addExif } from '../lib/sticker.js'
 let handler = async (m, { conn, text }) => {
-if (!m.quoted) throw 'الرجاء الاشارة الى الملصق الذي تريد أن تغير حقوقه مثال : \n *.wm gojo bot*'
+if (!m.quoted) throw 'الرجاء الاشارة الى الملصق الذي تريد أن تغير حقوقه مثال : \n *.سرقه gojo bot*'
 let stiker = false
 try {
 let [packname, ...author] = text.split('|')
 author = (author || []).join('|')
 let mime = m.quoted.mimetype || ''
-if (!/webp/.test(mime)) throw '*الرجاء الاشارة الى الملصق الذي تريد أن تغير حقوقه مثال : \n *.wm gojo bot*'
+if (!/webp/.test(mime)) throw '*الرجاء الاشارة الى الملصق الذي تريد أن تغير حقوقه مثال : \n *.سرقه gojo bot*'
 let img = await m.quoted.download()
-if (!img) throw '*الرجاء  الاشارة الى الملصق الذي تريد أن تغير حقوقه مثال : \n *.wm gojo bot*'
+if (!img) throw '*الرجاء  الاشارة الى الملصق الذي تريد أن تغير حقوقه مثال : \n *.سرقه gojo bot*'
 stiker = await addExif(img, packname || global.packname, author || global.author)
 } catch (e) {
 console.error(e)
@@ -19,5 +19,5 @@ else throw '*راسل صاحب البوت هناك مشكلة\n instagram.com/no
 }}
 handler.help = ['سرقه']
 handler.tags = ['سرقه']
-handler.command = /^take|wm$/i
+handler.command = /^take|سرقه$/i
 export default handler
