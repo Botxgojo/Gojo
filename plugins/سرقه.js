@@ -15,7 +15,7 @@ let handler = async (m, { conn, text }) => {
         
         stiker = await addExif(img, packname || global.packname, author || global.author)
         // Remove "bobiza" attribution
-        stiker = await addExif(img, packname || global.packname, author || global.author, '🥷')
+        stiker = await addExif(stiker, packname || global.packname, author || global.author, '🥷')
     } catch (e) {
         console.error(e)
         if (Buffer.isBuffer(e)) stiker = e
@@ -30,7 +30,7 @@ let handler = async (m, { conn, text }) => {
 }
 
 handler.help = ['سرقه']
-handler.tags = ['stiker']
+handler.tags = ['سرقه']
 handler.command = /^take|سرقه$/i
 
 export default handler
