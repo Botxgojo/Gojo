@@ -30,7 +30,6 @@ const handler = async (m, { conn, usedPrefix: _p }) => {
         externalAdReply: {
           title: 'GOJO┇BOT',
           body: "البوت الخاص بمملكة SPACE🚀",
-          thumbnailUrl: 'https://telegra.ph/file/2829c7653514416d207e2.jpg',
           sourceUrl: 'https://www.instagram.com/gojosaturo_876?igsh=amxrYmMydTh0NDN3',
           mediaType: 1,
           renderLargerThumbnail: true
