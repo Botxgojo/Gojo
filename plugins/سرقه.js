@@ -14,10 +14,10 @@ stiker = await addExif(img, packname || global.packname, author || global.author
 console.error(e)
 if (Buffer.isBuffer(e)) stiker = e
 } finally {
-if (stiker) conn.sendFile(m.chat, stiker, 'wm.webp', '', m, false, { asSticker: true })
+if (stiker) conn.sendFile(m.chat, stiker, 'سرقه.webp', '', m, false, { asSticker: true })
 else throw '*راسل صاحب البوت هناك مشكلة\n instagram.com/noureddine_ouafy*'
 }}
 handler.help = ['سرقه']
-handler.tags = ['sticker']
+handler.tags = ['سرقه']
 handler.command = /^take|wm$/i
 export default handler
