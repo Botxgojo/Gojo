@@ -32,7 +32,6 @@ const handler = async (m, { conn, usedPrefix: _p }) => {
           body: "البوت الخاص بمملكة SPACE🚀",
           sourceUrl: 'https://www.instagram.com/gojosaturo_876?igsh=amxrYmMydTh0NDN3',
           mediaType: 1,
-          renderLargerThumbnail: true
         }
       }
     }, { quoted: m });
