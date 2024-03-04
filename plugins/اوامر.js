@@ -78,7 +78,7 @@ const handler = async (m, { conn, usedPrefix: _p }) => {
 
 handler.help = ['اوامر'];
 handler.tags = ['test'];
-handler.command = [`اوامر', 'a', 'order'];
+handler.command = ['اوامر', 'a', 'order'];
 handler.register = false;
 
 export default handler;
