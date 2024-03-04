@@ -1,5 +1,8 @@
+import fetch from 'node-fetch'
+
 let timeout = 60000
 let poin = 500
+
 let handler = async (m, { conn, command, usedPrefix }) => {
     conn.tebakbendera = conn.tebakbendera ? conn.tebakbendera : {}
     let id = m.chat
@@ -8,7 +11,7 @@ let handler = async (m, { conn, command, usedPrefix }) => {
         throw false
     }
     let src = await (await fetch('https://gist.githubusercontent.com/YosefZoro1/2e1ba4a3f14368c5620ef099ac21bcdb/raw/bb90d056ec7dd052282ec2fd8c7ccaf0963a8bbc/game6.json')).json()
-  let json = src[Math.floor(Math.random() * src.length)]
+    let json = src[Math.floor(Math.random() * src.length)]
     let caption = `*${command.toUpperCase()}*
   ❐↞┇الـوقـت⏳↞ *${(timeout / 1000).toFixed(2)} ┇
   *استخدم .انسحب للأنسحاب*
