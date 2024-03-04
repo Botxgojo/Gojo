@@ -1,56 +1,32 @@
-import fs from 'fs'
-
-let handler = m => m;
-
-handler.all = async function(m, { conn }) {
+let handler = async (m, { conn }) => {
     let chat = global.db.data.chats[m.chat];
     let responses;
-    let isPlaying = false;
-
-    if (/^كت$/i.test(m.text) && !isPlaying) {
-        isPlaying = true;
+    if (/^كت$/i.test(m.text)) {
+        let time = 60; // 60 seconds
+        let word = ['لوفي', 'ناروتو', 'سابو', 'ايس', 'رايلي', 'جيرايا', 'ايتاتشي', 'ساسكي', 'شيسوي', 'يوهان', 'غوهان', 'آيزن', 'فايوليت', 'نامي', 'هانكوك', 'ايتاتشي', 'روبين', 'كاكاشي', 'ريومو', 'ريمورو', 'غوكو', 'غوغو', 'كيلوا', 'غون', 'كورابيكا', 'يوسكي', 'ايشيدا', 'ايتيشغو', 'ميناتو', 'رينجي', 'جيمبي', 'انوس', 'سايتاما', 'نيزيكو', 'اوراهارا', 'تانجيرو', 'نويل', 'استا', 'يونو', 'لايت']; // List of words
+        let chosenWord = word[Math.floor(Math.random() * word.length)]; // Choose a random word
         responses = [
-            // قائمة الأسماء هنا
+            `*تم بدء الكت، يرجى كتابة الكلمة: ${chosenWord}*
+            *『𝙂𝙊𝙅𝙊-𝘽𝙊𝙏』🤞*
+            `
         ];
 
-        let randomIndex = Math.floor(Math.random() * responses.length);
-        let correctAnswer = responses[randomIndex];
-
-        let timeout = 60000; // 60 ثانية
-
-        conn.reply(m.chat, correctAnswer, m);
-        
-        let points = 0;
-
-        setTimeout(() => {
-            if (chat.players && chat.players[m.sender]) {
-                if (chat.players[m.sender].answer) {
-                    if (chat.players[m.sender].answer.toLowerCase() === correctAnswer.toLowerCase()) {
-                        points += 60;
-                        conn.reply(m.chat, `أحسنت! لقد فزت بمكافأة 60 نقطة`, m);
-                    } else {
-                        conn.reply(m.chat, `للأسف، لم تكن سريعاً بما فيه الكفاية!`, m);
-                    }
-                } else {
-                    conn.reply(m.chat, `لم ترد بكلمة في الوقت المحدد!`, m);
-                }
-                delete chat.players[m.sender];
-            } else {
-                conn.reply(m.chat, `للأسف، لم ترد بكلمة في الوقت المحدد!`, m);
+        let timer = setTimeout(async () => {
+            if (chat.katTimer && chat.katTimer.id === timer) {
+                delete chat.katTimer;
+                conn.reply(m.chat, '*لقد خسرت، لم يتم كتابة الكلمة في الوقت المحدد.*', m);
             }
-            isPlaying = false;
-        }, timeout);
+        }, time * 1000);
 
-        chat.players = chat.players ? chat.players : {};
-        chat.players[m.sender] = {
-            answer: null
+        chat.katTimer = {
+            id: timer,
+            word: chosenWord
         };
-
-        fs.writeFileSync('./config.json', JSON.stringify(global.db));
-    } else if (chat.players && chat.players[m.sender]) {
-        chat.players[m.sender].answer = m.text;
     }
-
+    if (responses) {
+        let randomIndex = Math.floor(Math.random() * responses.length);
+        conn.reply(m.chat, responses[randomIndex], m);
+    }
     return !0;
 };
 
