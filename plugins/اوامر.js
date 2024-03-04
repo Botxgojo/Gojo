@@ -1,5 +1,7 @@
-let sendMessage = () => {
-  let form = `*⊱ ───── {※𝙒𝙀𝙇𝘾𝙊𝙈 𝙏𝙊 𝙎.𝙋.𝘾🚀※} ──── ⊰*
+const handler = async (m, { conn, usedPrefix: _p }) => {
+  try {
+    const text = `
+*⊱ ───── {※𝙒𝙀𝙇𝘾𝙊𝙈 𝙏𝙊 𝙎.𝙋.𝘾🚀※} ──── ⊰*
             *»»————> اهلا بك في 𝙎.𝙋.𝘾🚀 <————««*
 
 *🎮╍━╍╍━╍═『♞اوامر الالعاب♞』═━╍━╍╍━╍🎮*
@@ -54,11 +56,29 @@ let sendMessage = () => {
 
 *⬤✘⪼.معلومة*
 
-『𝙂𝙊𝙅𝙊-𝘽𝙊𝙏』🤞`;
+『𝙂𝙊𝙅𝙊-𝘽𝙊𝙏』🤞
+`.trim();
 
-  // Send the form to the designated recipient
-  console.log(form);
-}
+    conn.sendMessage(m.chat, {
+      text,
+      contextInfo: {
+        externalAdReply: {
+          title: 'GOJO┇BOT',
+          body: "البوت الخاص بمملكة SPACE🚀",
+          sourceUrl: 'https://www.instagram.com/gojosaturo_876?igsh=amxrYmMydTh0NDN3',
+          mediaType: 1,
+        }
+      }
+    }, { quoted: m });
+  } catch (e) {
+    conn.reply(m.chat, '❎ هناك خطأ في لائحة الاوامر', m);
+    throw e;
+  }
+};
 
-// Call the sendMessage function when the command is received
-sendMessage(اوامر);
+handler.help = ['اوامر'];
+handler.tags = ['test'];
+handler.command = [`اوامر', 'a', 'order'];
+handler.register = false;
+
+export default handler;
