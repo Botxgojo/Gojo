@@ -12,7 +12,7 @@ function getRandomImage() {
   const randomIndex = getRandomIndex(correctCharacters.length);
   const character = correctCharacters[randomIndex];
   // هنا يمكنك استبدال الرابط برابط للصور الخاصة بك
-  const imageUrl = `https://api.unsplash.com/photos/random?query=${character}&client_id=YOUR_CLIENT_ID`;
+  const imageUrl = `https://api.unsplash.com/photos/random?query=${character}&client_id=Screenshot_2024-03-04-12-28-18-453_com.whatsapp.w4b-edit.jpg`;
   return imageUrl;
 }
 
