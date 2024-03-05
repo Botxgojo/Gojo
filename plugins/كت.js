@@ -5,7 +5,7 @@ let handler = async (m, { conn }) => {
     let responses;
     let isPlaying = false;
 
-    if (/^كت$/i.test(m.text) && !isPlaying) {
+    if (/^كت$/i.test(m.text)) {
         isPlaying = true;
         responses = [
             'لوفي',
