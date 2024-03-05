@@ -1,4 +1,4 @@
-import { MessageType } from '@adiwajshing/baileys';
+import { MessageTypes } from '@adiwajshing/baileys';
 
 let handler = async (m, { conn }) => {
     let chat = global.db.data.chats[m.chat];
@@ -54,10 +54,10 @@ let handler = async (m, { conn }) => {
         let randomIndex = Math.floor(Math.random() * responses.length);
         let correctAnswer = responses[randomIndex];
 
-        let timeout = 60000; // 60 ثانية
+        let timeout = 60000; // 60 seconds
 
         conn.reply(m.chat, correctAnswer, m);
-
+        
         let timeoutID = setTimeout(() => {
             conn.reply(m.chat, `للأسف، انتهى الوقت!`, m);
             isPlaying = false;
@@ -69,8 +69,7 @@ let handler = async (m, { conn }) => {
             timeoutID: timeoutID
         };
         
-        global.db.data.chats[m.chat] = chat;
-        await global.db.write();
+        global.db.write();
     } else if (chat.players && chat.players[m.sender]) {
         clearTimeout(chat.players[m.sender].timeoutID);
         if (chat.players[m.sender].answer === null) {
@@ -86,4 +85,4 @@ handler.command = ['كت'];
 handler.help = ['كت'];
 handler.tags = ['game'];
 
-export default handler;
+module.exports = handler;
