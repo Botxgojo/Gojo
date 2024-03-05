@@ -4,7 +4,6 @@ import { join } from 'path'
 
 const defaultLang = 'ar'
 let handler = async (m, { conn, args, usedPrefix, command }) => {
-
   let lang = args[0]
   let text = args.slice(1).join(' ')
   if ((args[0] || '').length !== 2) {
@@ -14,11 +13,13 @@ let handler = async (m, { conn, args, usedPrefix, command }) => {
   if (!text && m.quoted?.text) text = m.quoted.text
 
   let res
-  try { res = await tts(text, lang) }
-  catch (e) {
-    m.reply(e + '')
+  try {
+    res = await tts(text, lang)
+  } catch (e) {
+    m.reply("حدث خطأ أثناء تحويل النص إلى صوت.")
+    console.error(e)
     text = args.join(' ')
-    if (!text) throw `تحويل نص لــأوديو لجميع اللغات \n\nمثال نكتب هكذا اذا اردنا ان نحصل على صوت عربي :\n\n ${usedPrefix}${command} ar مرحبا يا نور`
+    if (!text) throw `يُرجى تحديد النص الذي ترغب في تحويله إلى صوت. مثال:\n\n ${usedPrefix}${command} ar مرحبا يا نور`
     res = await tts(text, defaultLang)
   } finally {
     if (res) await conn.sendFile(m.chat, res, '', '', m, true)
@@ -35,11 +36,13 @@ function tts(text, lang = 'ar') {
   return new Promise((resolve, reject) => {
     try {
       let tts = gtts(lang)
-      let filePath = join(global.__dirname(import.meta.url), '../tmp', (1 * new Date) + '.wav')
+      let filePath = join(__dirname, '../tmp', (1 * new Date) + '.wav')
       tts.save(filePath, text, () => {
         resolve(readFileSync(filePath))
         unlinkSync(filePath)
       })
-    } catch (e) { reject(e) }
+    } catch (e) {
+      reject(e)
+    }
   })
-}
+                     }
