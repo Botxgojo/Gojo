@@ -82,7 +82,7 @@ let handler = async (m, { conn }) => {
     return !0;
 };
 
-handler.command = /^كت$/i;
+handler.command = ['كت'];
 handler.help = ['كت'];
 handler.tags = ['game'];
 
