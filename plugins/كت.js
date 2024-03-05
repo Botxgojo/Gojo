@@ -1,6 +1,6 @@
-let handler = m => m;
+import { MessageType } from '@adiwajshing/baileys';
 
-handler.all = async function(m, { conn }) {
+let handler = async (m, { conn }) => {
     let chat = global.db.data.chats[m.chat];
     let responses;
     let isPlaying = false;
@@ -63,7 +63,7 @@ handler.all = async function(m, { conn }) {
             isPlaying = false;
         }, timeout);
 
-        chat.players = chat.players ? chat.players : {};
+        chat.players = chat.players || {};
         chat.players[m.sender] = {
             answer: null,
             timeoutID: timeoutID
@@ -81,5 +81,9 @@ handler.all = async function(m, { conn }) {
 
     return !0;
 };
+
+handler.command = /^كت$/i;
+handler.help = ['كت'];
+handler.tags = ['game'];
 
 export default handler;
