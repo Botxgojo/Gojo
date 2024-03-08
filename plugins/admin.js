@@ -1,4 +1,5 @@
 import { areJidsSameUser } from '@adiwajshing/baileys'
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 let handler = async (m, { conn, participants }) => {
     let users = m.mentionedJid.filter(u => !areJidsSameUser(u, conn.user.id))
     let promoteUser = []
@@ -7,17 +8,15 @@ let handler = async (m, { conn, participants }) => {
             const res = await conn.groupParticipantsUpdate(m.chat, [user], 'promote')
             await delay(1 * 1000)
         }
-    m.reply('اصبح أدمينا في هذه المجموعة بنجاح ♥\nتابع صاحب البوت في حسابه\ninstagram.com/noureddine_ouafy')
+    m.reply('لقد اصبح مشرفا في المجموعة✅')
 
 }
-handler.help = ['admin']
+handler.help = ['ادمن']
 handler.tags = ['owner']
-handler.command = /^(admin)$/i
+handler.command = /^(ادمن)$/i
 
 handler.owner = true
 handler.group = true
 handler.botAdmin = true
 
 export default handler
-
-const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
