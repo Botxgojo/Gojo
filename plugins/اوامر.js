@@ -1,9 +1,8 @@
 const handler = async (m, { conn, usedPrefix: _p }) => {
   try {
-    let mention = m.mentionedJidList ? `*│⚛︎الـــســـلام عـــلـــيـــكـــم يـــا* ${m.mentionedJidList[0]} *!*\n` : `*│⚛︎الـــســـلام عـــلـــيـــكـــم يـــا 『د』*`;
     const text = `
 *«───────── « ⋅ʚ𝙮𝙪𝙣𝙖ɞ⋅ ─────────»*
-${mention}
+*│⚛︎الـــســـلام عـــلـــيـــكـــم يـــا 『د』*
 *│⚛︎معك/ي يونا للخدمات السريعه😊*
 *«─────── «الاوامر الترفيهيه⋅ » ───────»*
 *│❄↫(.سرقه)☄︎*
@@ -94,12 +93,10 @@ ${mention}
           body: "البوت الخاص بمملكة SPACE🚀",
           sourceUrl: 'https://www.instagram.com/gojosaturo_876?igsh=amxrYmMydTh0NDN3',
           mediaType: 1,
-          thumbnailUrl:
-            'https://telegra.ph/file/30d4fcc05484510e163a7.jpg'
+          jpegThumbnail: fs.readFileSync('https://telegra.ph/file/30d4fcc05484510e163a7.jpg')
         }
       }
     }, { quoted: m });
-    }
   } catch (e) {
     conn.reply(m.chat, '❎ هناك خطأ في لائحة الاوامر', m);
     throw e;
