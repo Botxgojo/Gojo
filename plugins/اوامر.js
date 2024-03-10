@@ -125,7 +125,7 @@ let handler = async (m, {conn, usedPrefix, usedPrefix: _p, __dirname, text, isPr
     `.trim();
 
     conn.sendMessage(m.chat, {
-        video: { url: randomVideoUrl }, caption: str,
+        video: { url: VideoUrl }, caption: str,
         mentions: [m.sender,global.conn.user.jid],
         gifPlayback: true,gifAttribution: 0
     }, { quoted: m });
@@ -160,4 +160,4 @@ function ucapan() {
         res = "مساء الخير 🌙"
     }
     return res
-  }
+      }
