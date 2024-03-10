@@ -99,8 +99,6 @@ ${mention}
         }
       }
     }, { quoted: m });
-    if (m.text.startsWith('.اوامر')) {
-      await conn.reaction(m.chat, '✅', m);
     }
   } catch (e) {
     conn.reply(m.chat, '❎ هناك خطأ في لائحة الاوامر', m);
