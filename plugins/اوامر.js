@@ -3,7 +3,7 @@ const handler = async (m, { conn, usedPrefix: _p }) => {
     let mention = m.mentionedJidList ? `*│⚛︎الـــســـلام عـــلـــيـــكـــم يـــا* ${m.mentionedJidList[0]} *!*\n` : `*│⚛︎الـــســـلام عـــلـــيـــكـــم يـــا 『د』*`;
     const text = `
 *«───────── « ⋅ʚ𝙮𝙪𝙣𝙖ɞ⋅ ─────────»*
-${mentio}
+${mention}
 *│⚛︎معك/ي يونا للخدمات السريعه😊*
 *«─────── «الاوامر الترفيهيه⋅ » ───────»*
 *│❄↫(.سرقه)☄︎*
@@ -101,7 +101,7 @@ ${mentio}
     }, { quoted: m });
     if (m.text.startsWith('.اوامر')) {
       await conn.reaction(m.chat, '✅', m);
-      }
+    }
   } catch (e) {
     conn.reply(m.chat, '❎ هناك خطأ في لائحة الاوامر', m);
     throw e;
