@@ -59,7 +59,7 @@ handler.all = async function (m) {
         responses = [ 
             'الحمدالله🤍',  
         ]; 
-    } else if (/^تحبني$/i.test(m.text)) { 
+    } else if (/^تحبيني$/i.test(m.text)) { 
         responses = [ 
             '🌚♥اكيد', 
             '*احب غوجو اكثر🐱*', 
@@ -68,9 +68,9 @@ handler.all = async function (m) {
         responses = [ 
             'هاي نورت✨',  
         ]; 
-    } else if (/^❤|♥$/i.test(m.text)) { 
+    } else if (/^يعمري|ياعمري|عيوني|ياعيوني$/i.test(m.text)) { 
         responses = [ 
-            '*اعشقق♥*',  
+            '*اعشقك💙*',  
         ]; 
     } else if (/^اهلا$/i.test(m.text)) { 
         responses = [ 
