@@ -111,7 +111,7 @@ let handler = async (m, { conn }) => {
 `.trim();
 
     conn.sendMessage(m.chat, {
-        video: { url: 'https://telegra.ph/file/772acd48a378af8d390af.mp4' },
+        video: { url: 'https://telegra.ph/file/cd9c74953bcacba1bdd45.mp4' },
         caption: str,
         mentions: [m.sender, global.conn.user.jid],
         gifPlayback: true,
