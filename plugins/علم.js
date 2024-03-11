@@ -10,7 +10,7 @@ let handler = async (m, { conn, command, usedPrefix }) => {
         conn.reply(m.chat, '❐┃لم يتم الاجابة علي السؤال بعد┃❌ ❯', conn.tebakbendera[id][0])
         throw false
     }
-    let src = await (await fetch('https://gist.githubusercontent.com/YosefZoro1/2e1ba4a3f14368c5620ef099ac21bcdb/raw/bb90d056ec7dd052282ec2fd8c7ccaf0963a8bbc/game6.json')).json()
+    let src = await (await fetch('https://raw.githubusercontent.com/Botxgojo/Gojo/master/%D8%B9%D9%84%D9%85%D9%85.json')).json()
     let json = src[Math.floor(Math.random() * src.length)]
     let caption = `*${command.toUpperCase()}*
   ❐↞┇الـوقـت⏳↞ *${(timeout / 1000).toFixed(2)} ┇
