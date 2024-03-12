@@ -3,6 +3,23 @@ import fetch from 'node-fetch';
 let timeout = 60000;
 let poin = 500;
 
+// إضافة المستمع للرسائل النصية مرة واحدة فقط
+conn.on('text', async (msg) => {
+    let id = msg.chat;
+    if (!(id in conn.tebakbendera)) return;
+    let json = conn.tebakbendera[id][1];
+    if (msg.text.toLowerCase() == json.answer.toLowerCase()) {
+        conn.reply(msg.chat, `❐↞┇✅ اجابة صحيحة ┇`, conn.tebakbendera[id][0]);
+        global.DATABASE._data.users[msg.sender].poin += conn.tebakbendera[id][2];
+        clearTimeout(conn.tebakbendera[id][3]);
+        delete conn.tebakbendera[id];
+    } else {
+        conn.reply(msg.chat, `❐↞┇❌ اجابة خاطئة ┇`, conn.tebakbendera[id][0]);
+        clearTimeout(conn.tebakbendera[id][3]);
+        delete conn.tebakbendera[id];
+    }
+});
+
 let handler = async (m, { conn, command, usedPrefix }) => {
     conn.tebakbendera = conn.tebakbendera ? conn.tebakbendera : {};
     let id = m.chat;
@@ -26,21 +43,6 @@ let handler = async (m, { conn, command, usedPrefix }) => {
             delete conn.tebakbendera[id];
         }, timeout)
     ];
-
-    conn.on('text', async (msg) => {
-        if (!(id in conn.tebakbendera)) return;
-        let json = conn.tebakbendera[id][1];
-        if (msg.text.toLowerCase() == json.answer.toLowerCase()) {
-            conn.reply(m.chat, `❐↞┇✅ اجابة صحيحة ┇`, conn.tebakbendera[id][0]);
-            global.DATABASE._data.users[m.sender].poin += conn.tebakbendera[id][2];
-            clearTimeout(conn.tebakbendera[id][3]);
-            delete conn.tebakbendera[id];
-        } else {
-            conn.reply(m.chat, `❐↞┇❌ اجابة خاطئة ┇`, conn.tebakbendera[id][0]);
-            clearTimeout(conn.tebakbendera[id][3]);
-            delete conn.tebakbendera[id];
-        }
-    });
 };
 
 handler.help = ['guessflag'];
