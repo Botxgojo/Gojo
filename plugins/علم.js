@@ -1,8 +1,3 @@
-import fetch from 'node-fetch';
-
-let timeout = 60000;
-let poin = 500;
-
 let handler = async (m, { conn, command, usedPrefix }) => {
     conn.tebakbendera = conn.tebakbendera ? conn.tebakbendera : {};
     let id = m.chat;
@@ -31,14 +26,25 @@ let handler = async (m, { conn, command, usedPrefix }) => {
                 delete conn.tebakbendera[id];
             }, timeout)
         ];
+
+        // Add code to handle user response
+        conn.on('text', async (m) => {
+            if (m.chat in conn.tebakbendera) {
+                let json = conn.tebakbendera[m.chat][1];
+                let answer = m.text.trim();
+                if (answer.toLowerCase() === json.response.toLowerCase()) {
+                    conn.reply(m.chat, 'اجابة صحيحة ✅', conn.tebakbendera[m.chat][0]);
+                    // You can add points or other rewards here
+                    delete conn.tebakbendera[m.chat];
+                } else {
+                    conn.reply(m.chat, 'اجابة خاطئة ❌', conn.tebakbendera[m.chat][0]);
+                    // You can deduct points or handle wrong answers differently here
+                }
+            }
+        });
+
     } catch (e) {
         console.error(e);
         conn.reply(m.chat, 'حدث خطأ أثناء معالجة الطلب. الرجاء المحاولة مرة أخرى لاحقًا.', m);
     }
 };
-
-handler.help = ['guessflag'];
-handler.tags = ['game'];
-handler.command = /^علم/i;
-
-export default handler;
