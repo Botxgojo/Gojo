@@ -26,7 +26,23 @@ let handler = async (m, { conn, command, usedPrefix }) => {
             delete conn.tebakbendera[id];
         }, timeout)
     ];
+
+    conn.on('text', async (msg) => {
+        if (!(id in conn.tebakbendera)) return;
+        let json = conn.tebakbendera[id][1];
+        if (msg.text.toLowerCase() == json.answer.toLowerCase()) {
+            conn.reply(m.chat, `❐↞┇✅ اجابة صحيحة ┇`, conn.tebakbendera[id][0]);
+            global.DATABASE._data.users[m.sender].poin += conn.tebakbendera[id][2];
+            clearTimeout(conn.tebakbendera[id][3]);
+            delete conn.tebakbendera[id];
+        } else {
+            conn.reply(m.chat, `❐↞┇❌ اجابة خاطئة ┇`, conn.tebakbendera[id][0]);
+            clearTimeout(conn.tebakbendera[id][3]);
+            delete conn.tebakbendera[id];
+        }
+    });
 };
+
 handler.help = ['guessflag'];
 handler.tags = ['game'];
 handler.command = /^علم/i;
