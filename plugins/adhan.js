@@ -14,9 +14,9 @@ if (!text) throw `مثال : \n ${usedPrefix + command} berkane`
             m.reply(eror)
         }
 }
-handler.help = ['adhan']
+handler.help = ['اذان']
 handler.tags = ['islam']
-handler.command = /^(adhan)$/i
+handler.command = /^(اذان|آذان|أذان|وقت_الصلاه_في)$/i
 export default handler
 
 async function fetchPrayerTimes(q) {
@@ -28,13 +28,13 @@ async function fetchPrayerTimes(q) {
     const $ = cheerio.load(html);
 
     const prayerTimes = {
-      date: $('b:contains("الإثنين")').text().trim(), // Mengambil informasi tanggal adzan saat ini
-      fajr: $('td:contains("موعد اذان الفجر")').next().text().trim(), // Mengambil waktu adzan Fajr
-      dhuhr: $('td:contains("موعد اذان الظهر")').next().text().trim(), // Mengambil waktu adzan Dhuhr
-      asr: $('td:contains("موعد اذان العصر")').next().text().trim(), // Mengambil waktu adzan Asr
-      maghrib: $('td:contains("موعد اذان المغرب")').next().text().trim(), // Mengambil waktu adzan Maghrib
-      isha: $('td:contains("موعد اذان العشاء")').next().text().trim(), // Mengambil waktu adzan Isha
-      imsak: $('div.imsak li:contains("موعد الامساك اليوم")').text().trim().split(' ')[3], // Mengambil waktu imsak
+      الوقت: $('b:contains("الإثنين")').text().trim(), // Mengambil informasi tanggal adzan saat ini
+      الفجر: $('td:contains("موعد اذان الفجر")').next().text().trim(), // Mengambil waktu adzan Fajr
+      الظهر: $('td:contains("موعد اذان الظهر")').next().text().trim(), // Mengambil waktu adzan Dhuhr
+      العصر: $('td:contains("موعد اذان العصر")').next().text().trim(), // Mengambil waktu adzan Asr
+      المغرب: $('td:contains("موعد اذان المغرب")').next().text().trim(), // Mengambil waktu adzan Maghrib
+      العشاء: $('td:contains("موعد اذان العشاء")').next().text().trim(), // Mengambil waktu adzan Isha
+      الامساك: $('div.imsak li:contains("موعد الامساك اليوم")').text().trim().split(' ')[3], // Mengambil waktu imsak
     };
     return prayerTimes;
   } catch (error) {
