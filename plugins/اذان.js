@@ -6,10 +6,10 @@ let handler = async (m, {
     usedPrefix,
     command
 }) => {
-if (!text) throw `مثال : \n ${usedPrefix + command} berkane`
+if (!text) throw `مثال : \n ${usedPrefix + command} sa`
     try {
             let res = await fetchPrayerTimes(text)
-            m.reply(`${Object.entries(res).map(([name, data]) => `Salat *${name}* : ${data}`).join('\n').trim()}`.trim())
+            m.reply(`${Object.entries(res).map(([name, data]) => `صلاة *${name}* : ${data}`).join('\n').trim()}`.trim())
         } catch (e) {
             m.reply(eror)
         }
