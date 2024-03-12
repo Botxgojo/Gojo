@@ -14,12 +14,12 @@ let handler = async (m, { conn, text }) => {
   let stiker = await sticker(null, wasted, packname, author)
   conn.sendFile(m.chat, stiker, 'wasted.webp', '', m)
  } catch (e) {
-   m.reply('راجاء قم بالاشارة لصورة ثم اكتب \n.wasted')
+   m.reply('راجاء قم بالاشارة لصورة ثم اكتب \n.ووستد')
   }
 }
-handler.help = ['wasted']
+handler.help = ['ووستد']
 handler.tags = ['sticker']
-handler.command = /^wasted$/i
+handler.command = /^ووستد$/i
 handler.owner = false
 handler.mods = false
 handler.premium = false
